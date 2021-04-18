@@ -1,0 +1,84 @@
+- title: Message Overview
+  reveal: baseProtocol
+  children:
+  - title: Base Protocol
+    anchor: baseProtocol
+    children:
+    - title: Header Part
+      anchor: headerPart
+    - title: Content Part
+      anchor: contentPart
+    - title: Request Message
+      anchor: requestMessage
+    - title: Response Message
+      anchor: responseMessage
+    - title: Notification Message
+      anchor: notificationMessage
+    - title: $/cancelRequest
+      anchor: cancelRequest
+    - title: $/progress
+      anchor: progress
+  - title: Basic Structures
+    anchor: dataTypes
+    children:
+    - title: URI
+      anchor: uri
+    - title: Work Done Progress
+      anchor: workDoneProgress
+    - title: Client Initiated Progress
+      anchor: clientInitiatedProgress
+    - title: Server Initiated Progress
+      anchor: serverInitiatedProgress
+    - title: Partial Results
+      anchor: partialResults
+    - title: Partial Result Params
+      anchor: partialResultParams
+    - title: Trace Value
+      anchor: traceValue
+  - title: General Messages
+    anchor: general
+    children:
+    - title: initialize
+      anchor: initialize
+    - title: initialized
+      anchor: initialized
+    - title: shutdown
+      anchor: shutdown
+    - title: exit
+      anchor: exit
+    - title: logTrace
+      anchor: logTrace
+    - title: setTrace
+      anchor: setTrace
+  - title: Window
+    anchor: window
+    children:
+    - title: showMessage
+      anchor: window_showMessage
+    - title: showMessageRequest
+      anchor: window_showMessageRequest
+    - title: showDocument
+      anchor: window_showDocument
+    - title: logMessage
+      anchor: window_logMessage
+    - title: progress/create
+      anchor: window_workDoneProgress_create
+    - title: progress/cancel
+      anchor: window_workDoneProgress_cancel
+  - title: Telemetry
+    anchor: telemetry
+    children:
+    - title: event
+      anchor: telemetry_event
+  - title: Client
+    anchor: client
+    children:
+    - title: registerCapability
+      anchor: client_registerCapability
+    - title: unregisterCapability
+      anchor: client_unregisterCapability
+  - title: Change Log
+    anchor: changeLog
+    children:
+    - title: 3.17.0
+      anchor: version_3_17_0
