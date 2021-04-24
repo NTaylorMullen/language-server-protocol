@@ -1,0 +1,6 @@
+- type: integer
+  link: numbers
+- type: uinteger
+  link: numbers
+- type: decimal
+  link: numbers
