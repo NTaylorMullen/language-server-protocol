@@ -27,3 +27,4 @@ export namespace DiagnosticSeverity {
 }
 
 export type DiagnosticSeverity = 1 | 2 | 3 | 4;
+```

@@ -16,8 +16,6 @@
     link: responseError
   - type: ErrorCodes
     link: errorCodes
-  - type: ErrorCodes.RequestCancelled
-    link: errorCodes
   - type: NotificationMessage
     link: notificationMessage
 - name: "$ Notifications and Requests"
@@ -25,14 +23,12 @@
   - type: CancelParams
     link: cancelParams
   - type: ProgressParams
-    link: progressParams
+    link: progress#progressParams
   - type: ProgressToken
-    link: progressParams
+    link: progress#progressParams
 
 - name: "Basic JSON Structures"
   children:
-  - type: Uri
-    link: uri
   - type: URI
     link: uri
   - type: DocumentUri
@@ -61,4 +57,96 @@
     link: diagnosticRelatedInformation
   - type: CodeDescription
     link: codeDescription
-  
+  - type: Command
+    link: command
+  - type: TextEdit
+    link: textEdit
+  - type: ChangeAnnotation
+    link: textEdit
+  - type: ChangeAnnotationIdentifier
+    link: textEdit
+  - type: AnnotatedTextEdit
+    link: textEdit
+  - type: TextDocumentEdit
+    link: textEdit#textDocumentEdit
+  - type: CreateFileOptions
+    link: fileResourceChanges
+  - type: CreateFile
+    link: fileResourceChanges
+  - type: RenameFileOptions
+    link: fileResourceChanges
+  - type: RenameFile
+    link: fileResourceChanges
+  - type: DeleteFileOptions
+    link: fileResourceChanges
+  - type: DeleteFile
+    link: fileResourceChanges
+  - type: WorkspaceEdit
+    link: workspaceEdit
+  - type: WorkspaceEditClientCapabilities
+    link: workspaceEdit#workspaceEditClientCapabilities
+  - type: ResourceOperationKind
+    link: workspaceEdit#workspaceEditClientCapabilities
+  - type: FailureHandlingKind
+    link: workspaceEdit#workspaceEditClientCapabilities
+  - type: TextDocumentIdentifier
+    link: textDocument
+  - type: TextDocumentItem
+    link: textDocument#textDocumentItem
+  - type: VersionedTextDocumentIdentifier
+    link: textDocument#versionedTextDocumentIdentifier
+  - type: OptionalVersionedTextDocumentIdentifier
+    link: textDocument#versionedTextDocumentIdentifier
+  - type: TextDocumentPositionParams
+    link: textDocument#textDocumentPositionParams
+  - type: DocumentFilter
+    link: documentFilter
+  - type: StaticRegistrationOptions
+    link: documentFilter#staticRegistrationOptions
+  - type: TextDocumentRegistrationOptions
+    link: documentFilter#textDocumentRegistrationOptions
+  - type: MarkupKind
+    link: markup
+  - type: MarkupContent
+    link: markup
+  - type: MarkdownClientCapabilities
+    link: markup
+  - type: WorkDoneProgressBegin
+    link: progress#workDoneProgressBegin
+  - type: $/progress
+    link: progress
+  - type: WorkDoneProgressReport
+    link: progress#workDoneProgressReport
+  - type: WorkDoneProgressEnd
+    link: progress#workDoneProgressEnd
+  - type: WorkDoneProgressParams
+    link: progress#clientInitiatedProgress
+  - type: WorkDoneProgressOptions
+    link: progress#clientInitiatedProgress
+  - type: PartialResultParams
+    link: progress#partialResultParams
+  - type: TraceValue
+    link: trace#traceValue
+
+- name: "Actual Protocol"
+  children:
+  - type: InitializeParams
+    link: initialize
+  - type: InitializeResult
+    link: initialize#initializeResult
+  - type: InitializedParams
+    link: initialize#initializedParams
+  - type: InitializeError.unknownProtocolVersion
+    link: initialize#initializeErrorCode
+  - type: InitializeError
+    link: initialize#initializeErrorData
+  - type: ClientCapabilities
+    link: clientCapabilities#clientCapabilities
+  - type: TextDocumentClientCapabilities
+    link: clientCapabilities#textDocumentClientCapabilities
+  - type: ServerCapabilities
+    link: serverCapabilities#serverCapabilities
+  - type: LogTraceParams
+    link: trace#logTraceParams
+  - type: SetTraceParams
+    link: trace#setTraceParams
