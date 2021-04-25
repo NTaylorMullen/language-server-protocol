@@ -1,3 +1,7 @@
+---
+layout: types317
+---
+
 #### <a href="#number" name="number" class="anchor"> Numbers </a>
 
 The protocol use the following definitions for integers, unsigned integers and decimal numbers:

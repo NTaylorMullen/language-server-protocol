@@ -1,6 +1,64 @@
-- type: integer
-  link: numbers
-- type: uinteger
-  link: numbers
-- type: decimal
-  link: numbers
+- name: "Base Protocol JSON structures"
+  children:
+  - type: integer
+    link: numbers
+  - type: uinteger
+    link: numbers
+  - type: decimal
+    link: numbers
+  - type: Message
+    link: message
+  - type: RequestMessage
+    link: requestMessage
+  - type: ResponseMessage
+    link: responseMessage
+  - type: ResponseError
+    link: responseError
+  - type: ErrorCodes
+    link: errorCodes
+  - type: ErrorCodes.RequestCancelled
+    link: errorCodes
+  - type: NotificationMessage
+    link: notificationMessage
+- name: "$ Notifications and Requests"
+  children:
+  - type: CancelParams
+    link: cancelParams
+  - type: ProgressParams
+    link: progressParams
+  - type: ProgressToken
+    link: progressParams
+
+- name: "Basic JSON Structures"
+  children:
+  - type: Uri
+    link: uri
+  - type: URI
+    link: uri
+  - type: DocumentUri
+    link: uri
+  - type: RegularExpressionsClientCapabilities
+    link: regularExpressions
+  - type: TextDocument
+    link: textDocuments
+  - type: EOL
+    link: textDocuments
+  - type: Position
+    link: position
+  - type: Range
+    link: range
+  - type: Location
+    link: location
+  - type: LocationLink
+    link: locationLink
+  - type: Diagnostic
+    link: diagnostic
+  - type: DiagnosticSeverity
+    link: diagnosticSeverity
+  - type: DiagnosticTag
+    link: diagnosticTag
+  - type: DiagnosticRelatedInformation
+    link: diagnosticRelatedInformation
+  - type: CodeDescription
+    link: codeDescription
+  

@@ -1,0 +1,13 @@
+---
+layout: types317
+---
+
+#### Abstract Message
+
+A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
+
+```typescript
+interface Message {
+	jsonrpc: string;
+}
+```
