@@ -1,6 +1,62 @@
-- type: integer
-  link: numbers
-- type: uinteger
-  link: numbers
-- type: decimal
-  link: numbers
+- name: "Base Protocol JSON structures"
+  children:
+  - type: integer
+    link: number
+  - type: uinteger
+    link: number
+  - type: decimal
+    link: number
+  - type: Message
+    link: message
+  - type: RequestMessage
+    link: requestMessage
+  - type: ResponseMessage
+    link: responseMessage
+  - type: ResponseError
+    link: responseMessage
+  - type: ErrorCodes
+    link: responseMessage
+  - type: NotificationMessage
+    link: notificationMessage
+- name: "$ Notifications and Requests"
+  children:
+  - type: CancelParams
+    link: cancelRequest
+  - type: ProgressParams
+    link: progress
+  - type: ProgressToken
+    link: progress
+
+- name: "Basic JSON Structures"
+  children:
+  - type: Uri
+    link: uri
+  - type: URI
+    link: uri
+  - type: DocumentUri
+    link: uri
+  - type: RegularExpressionsClientCapabilities
+    link: regExp
+  - type: TextDocument
+    link: textDocuments
+  - type: EOL
+    link: textDocuments
+  - type: Position
+    link: position
+  - type: Range
+    link: range
+  - type: Location
+    link: location
+  - type: LocationLink
+    link: locationLink
+  - type: Diagnostic
+    link: diagnostic
+  - type: DiagnosticSeverity
+    link: diagnostic
+  - type: DiagnosticTag
+    link: diagnostic
+  - type: DiagnosticRelatedInformation
+    link: diagnostic
+  - type: CodeDescription
+    link: diagnostic
+  

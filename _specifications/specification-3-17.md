@@ -6,11 +6,29 @@ sectionid: specification-3-17
 toc: specification-3-17-toc
 index: 2
 ---
+
+{::options parse_block_html="true" /}
+
 # Language Server Protocol Specification - 3.17
 
 This document describes the upcoming 3.17.x version of the language server protocol. An implementation for node of the 3.17.x version of the protocol can be found [here](https://github.com/Microsoft/vscode-languageserver-node).
 
 **Note:** edits to this specification can be made via a pull request against this markdown [document](https://github.com/Microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-17.md).
+
+<div id="toggleCodeSections" markdown="0" class="expandInner">
+	<p id="expandAll">
+		<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-arrows-expand" viewBox="0 0 16 16">
+			<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z"/>
+		</svg>
+		Expand All Code Sections
+	</p>
+	<p id="collapseAll">
+		<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+			<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z"/>
+		</svg>
+		Collapse All Code Sections
+	</p>
+</div>
 
 ## <a href="#whatIsNew" name="whatIsNew" class="anchor"> What's new in 3.17 </a>
 
@@ -67,7 +85,9 @@ The following TypeScript definitions describe the base [JSON-RPC protocol](http:
 
 #### <a href="#number" name="number" class="anchor"> Numbers </a>
 
-The protocol use the following definitions for integers, unsigned integers and decimal numbers:
+The protocol use the following definitions for integers, unsigned integers and decimal numbers.
+
+<details data-parent="number"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -93,19 +113,26 @@ export type uinteger = number;
  */
 export type decimal = number;
 ```
+</details>
 
-#### Abstract Message
+#### <a href="#message" name="message" class="anchor"> Abstract Message </a>
 
 A general message as defined by JSON-RPC. The language server protocol always uses "2.0" as the `jsonrpc` version.
+
+<details data-parent="message"><summary markdown="0">Code</summary>
 
 ```typescript
 interface Message {
 	jsonrpc: string;
 }
 ```
+</details>
+
 #### <a href="#requestMessage" name="requestMessage" class="anchor"> Request Message </a>
 
 A request message to describe a request between the client and the server. Every processed request must send a response back to the sender of the request.
+
+<details data-parent="requestMessage"><summary markdown="0">Code</summary>
 
 ```typescript
 interface RequestMessage extends Message {
@@ -126,10 +153,13 @@ interface RequestMessage extends Message {
 	params?: array | object;
 }
 ```
+</details>
 
 #### <a href="#responseMessage" name="responseMessage" class="anchor"> Response Message </a>
 
 A Response Message sent as a result of a request. If a request doesn't provide a result value the receiver of a request still needs to return a response message to conform to the JSON RPC specification. The result property of the ResponseMessage should be set to `null` in this case to signal a successful request.
+
+<details data-parent="responseMessage"><summary markdown="0">Code</summary>
 
 ```typescript
 interface ResponseMessage extends Message {
@@ -251,9 +281,13 @@ export namespace ErrorCodes {
 	export const lspReservedErrorRangeEnd: integer = -32800;
 }
 ```
+</details>
+
 #### <a href="#notificationMessage" name="notificationMessage" class="anchor"> Notification Message </a>
 
 A notification message. A processed notification message must not send a response back. They work like events.
+
+<details data-parent="notificationMessage"><summary markdown="0">Code</summary>
 
 ```typescript
 interface NotificationMessage extends Message {
@@ -268,6 +302,7 @@ interface NotificationMessage extends Message {
 	params?: array | object;
 }
 ```
+</details>
 
 #### <a href="#dollarRequests" name="dollarRequests" class="anchor"> $ Notifications and Requests </a>
 
@@ -281,6 +316,8 @@ _Notification_:
 * method: '$/cancelRequest'
 * params: `CancelParams` defined as follows:
 
+<details data-parent="cancelRequest"><summary markdown="0">Code</summary>
+
 ```typescript
 interface CancelParams {
 	/**
@@ -289,6 +326,7 @@ interface CancelParams {
 	id: integer | string;
 }
 ```
+</details>
 
 A request that got canceled still needs to return from the server and send a response back. It can not be left open / hanging. This is in line with the JSON RPC protocol that requires that every request sends a response back. In addition it allows for returning partial results on cancel. If the request returns an error response on cancellation it is advised to set the error code to `ErrorCodes.RequestCancelled`.
 
@@ -303,6 +341,8 @@ A progress notification has the following properties:
 _Notification_:
 * method: '$/progress'
 * params: `ProgressParams` defined as follows:
+
+<details data-parent="progress"><summary markdown="0">Code</summary>
 
 ```typescript
 type ProgressToken = integer | string;
@@ -319,6 +359,7 @@ interface ProgressParams<T> {
 	value: T;
 }
 ```
+</details>
 
 Progress is reported against a token. The token is different than the request ID which allows to report progress out of band and also for notification.
 
@@ -374,6 +415,8 @@ The following client capability is used to announce a client's regular expressio
 * property path (optional): `general.regularExpressions`
 * property type: `RegularExpressionsClientCapabilities` defined as follows:
 
+<details data-parent="regExp"><summary markdown="0">Code</summary>
+
 ```typescript
 /**
  * Client capabilities specific to regular expressions.
@@ -390,6 +433,7 @@ export interface RegularExpressionsClientCapabilities {
 	version?: string;
 }
 ```
+</details>
 
 The following table lists the well known engine values. Please note that the table should be driven by the community which integrates LSP into existing clients. It is not the goal of the spec to list all available regular expression engines.
 
@@ -422,6 +466,8 @@ export const EOL: string[] = ['\n', '\r\n', '\r'];
 
 Position in a text document expressed as zero-based line and zero-based character offset. A position is between two characters like an 'insert' cursor in a editor. Special values like for example `-1` to denote the end of a line are not supported.
 
+<details data-parent="position"><summary markdown="0">Code</summary>
+
 ```typescript
 interface Position {
 	/**
@@ -440,6 +486,8 @@ interface Position {
 	character: uinteger;
 }
 ```
+</details>
+
 #### <a href="#range" name="range" class="anchor"> Range </a>
 
 A range in a text document expressed as (zero-based) start and end positions. A range is comparable to a selection in an editor. Therefore the end position is exclusive. If you want to specify a range that contains a line including the line ending character(s) then use an end position denoting the start of the next line. For example:
@@ -449,6 +497,8 @@ A range in a text document expressed as (zero-based) start and end positions. A 
     end : { line: 6, character: 0 }
 }
 ```
+
+<details data-parent="range"><summary markdown="0">Code</summary>
 
 ```typescript
 interface Range {
@@ -463,20 +513,27 @@ interface Range {
 	end: Position;
 }
 ```
+</details>
 
 #### <a href="#location" name="location" class="anchor"> Location </a>
 
 Represents a location inside a resource, such as a line inside a text file.
+
+<details data-parent="location"><summary markdown="0">Code</summary>
+
 ```typescript
 interface Location {
 	uri: DocumentUri;
 	range: Range;
 }
 ```
+</details>
 
 #### <a href="#locationLink" name="locationLink" class="anchor"> LocationLink </a>
 
 Represents a link between a source and a target location.
+
+<details data-parent="locationLink"><summary markdown="0">Code</summary>
 
 ```typescript
 interface LocationLink {
@@ -510,10 +567,13 @@ interface LocationLink {
 	targetSelectionRange: Range;
 }
 ```
+</details>
 
 #### <a href="#diagnostic" name="diagnostic" class="anchor"> Diagnostic </a>
 
 Represents a diagnostic, such as a compiler error or warning. Diagnostic objects are only valid in the scope of a resource.
+
+<details data-parent="diagnostic"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface Diagnostic {
@@ -574,8 +634,11 @@ export interface Diagnostic {
 	data?: unknown;
 }
 ```
+</details>
 
 The protocol currently supports the following diagnostic severities and tags:
+
+<details data-parent="diagnostic"><summary markdown="0">Code</summary>
 
 ```typescript
 export namespace DiagnosticSeverity {
@@ -622,8 +685,11 @@ export namespace DiagnosticTag {
 
 export type DiagnosticTag = 1 | 2;
 ```
+</details>
 
 `DiagnosticRelatedInformation` is defined as follows:
+
+<details data-parent="diagnostic"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -643,8 +709,11 @@ export interface DiagnosticRelatedInformation {
 	message: string;
 }
 ```
+</details>
 
 `CodeDescription` is defined as follows:
+
+<details data-parent="diagnostic"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -659,6 +728,7 @@ export interface CodeDescription {
 	href: URI;
 }
 ```
+</details>
 
 #### <a href="#command" name="command" class="anchor"> Command </a>
 

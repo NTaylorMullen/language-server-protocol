@@ -457,12 +457,13 @@ pre[class=highlight] {
 	color: #1034a8 !important;
 }
 
-a {
-	color: #2753e3;
+code.highlighter-rouge a {
+	color: #bd4147;
+	font-weight: bold;
 }
 
 a:hover {
-	color: #1034a8
+	color: #1034a8;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -475,3 +476,34 @@ a:hover {
 		font-size: 14px;
 	}
 }
+
+summary {
+	cursor: pointer;
+	user-select: none;
+	margin-bottom: 20px;
+}
+
+div#toggleCodeSections {
+	font-weight: bold;
+	border-top: 1px solid lightgray;
+	padding: 5px;
+	cursor: pointer;
+	user-select: none;
+
+	&.expandInner p#expandAll {
+		display: block;
+	}
+
+	&.collapseInner p#expandAll {
+		display: none;
+	}
+
+	&.expandInner p#collapseAll {
+		display: none;
+	}
+
+	&.collapseInner p#collapseAll {
+		display: block;
+	}
+}
+
