@@ -1,154 +1,177 @@
 - name: "Base Protocol JSON structures"
   children:
-  - type: integer
-    link: number
-  - type: uinteger
-    link: number
-  - type: decimal
-    link: number
-  - type: Message
-    link: message
-  - type: RequestMessage
-    link: requestMessage
-  - type: ResponseMessage
-    link: responseMessage
-  - type: ResponseError
-    link: responseMessage
-  - type: ErrorCodes
-    link: responseMessage
-  - type: NotificationMessage
-    link: notificationMessage
+  - type: 'integer'
+    link: '/specification-3-17#number'
+  - type: 'uinteger'
+    link: '/specification-3-17#number'
+  - type: 'decimal'
+    link: '/specification-3-17#number'
+  - type: 'Message'
+    link: '/specification-3-17#message'
+  - type: 'RequestMessage'
+    link: '/specification-3-17#requestMessage'
+  - type: 'ResponseMessage'
+    link: '/specification-3-17#responseMessage'
+  - type: 'ResponseError'
+    link: '/specification-3-17#responseMessage'
+  - type: 'ErrorCodes'
+    link: '/specification-3-17#responseMessage'
+  - type: 'NotificationMessage'
+    link: '/specification-3-17#notificationMessage'
 - name: "$ Notifications and Requests"
   children:
-  - type: CancelParams
-    link: cancelRequest
-  - type: ProgressParams
-    link: progress
-  - type: ProgressToken
-    link: progress
+  - type: 'CancelParams'
+    link: '/specification-3-17#cancelRequest'
+  - type: 'ProgressParams'
+    link: '/specification-3-17#progress'
+  - type: 'ProgressToken'
+    link: '/specification-3-17#progress'
 
 - name: "Basic JSON Structures"
   children:
-  - type: Uri
-    link: uri
-  - type: URI
-    link: uri
-  - type: DocumentUri
-    link: uri
-  - type: RegularExpressionsClientCapabilities
-    link: regExp
-  - type: TextDocument
-    link: textDocuments
-  - type: EOL
-    link: textDocuments
-  - type: Position
-    link: position
-  - type: Range
-    link: range
-  - type: Location
-    link: location
-  - type: LocationLink
-    link: locationLink
-  - type: Diagnostic
-    link: diagnostic
-  - type: DiagnosticSeverity
-    link: diagnostic
-  - type: DiagnosticTag
-    link: diagnostic
-  - type: DiagnosticRelatedInformation
-    link: diagnostic
-  - type: CodeDescription
-    link: diagnostic
-  - type: Command
-    link: command
-  - type: TextEdit
-    link: textEdit
-  - type: ChangeAnnotation
-    link: textEdit
-  - type: ChangeAnnotationIdentifier
-    link: textEdit
-  - type: AnnotatedTextEdit
-    link: textEdit
-  - type: TextDocumentEdit
-    link: textDocumentEdit
-  - type: CreateFileOptions
-    link: resourceChanges
-  - type: CreateFile
-    link: resourceChanges
-  - type: RenameFileOptions
-    link: resourceChanges
-  - type: RenameFile
-    link: resourceChanges
-  - type: DeleteFileOptions
-    link: resourceChanges
-  - type: DeleteFile
-    link: resourceChanges
-  - type: WorkspaceEdit
-    link: workspaceEdit
-  - type: WorkspaceEditClientCapabilities
-    link: workspaceEditClientCapabilities
-  - type: ResourceOperationKind
-    link: workspaceEditClientCapabilities
-  - type: FailureHandlingKind
-    link: workspaceEditClientCapabilities
-  - type: TextDocumentIdentifier
-    link: textDocumentIdentifier
-  - type: TextDocumentItem
-    link: textDocumentItem
-  - type: VersionedTextDocumentIdentifier
-    link: versionedTextDocumentIdentifier
-  - type: OptionalVersionedTextDocumentIdentifier
-    link: versionedTextDocumentIdentifier
-  - type: TextDocumentPositionParams
-    link: textDocumentPositionParams
-  - type: DocumentFilter
-    link: documentFilter
-  - type: DocumentSelector
-    link: documentFilter
-  - type: StaticRegistrationOptions
-    link: staticRegistrationOptions
-  - type: TextDocumentRegistrationOptions
-    link: textDocumentRegistrationOptions
-  - type: MarkupKind
-    link: markupContent
-  - type: MarkupContent
-    link: markupContent
-  - type: MarkdownClientCapabilities
-    link: markupContent
-  - type: WorkDoneProgressBegin
-    link: workDoneProgressBegin
-  - type: $/progress
-    link: workDoneProgressBegin
-  - type: WorkDoneProgressReport
-    link: workDoneProgressReport
-  - type: WorkDoneProgressEnd
-    link: workDoneProgressEnd
-  - type: WorkDoneProgressParams
-    link: clientInitiatedProgress
-  - type: WorkDoneProgressOptions
-    link: clientInitiatedProgress
-  - type: PartialResultParams
-    link: partialResultParams
-  - type: TraceValue
-    link: traceValue
+  - type: 'Uri'
+    link: '/specification-3-17#uri'
+  - type: 'URI'
+    link: '/specification-3-17#uri'
+  - type: 'DocumentUri'
+    link: '/specification-3-17#uri'
+  - type: 'RegularExpressionsClientCapabilities'
+    link: '/specification-3-17#regExp'
+  - type: 'TextDocument'
+    link: '/specification-3-17#textDocuments'
+  - type: 'EOL'
+    link: '/specification-3-17#textDocuments'
+  - type: 'Position'
+    link: '/specification-3-17#position'
+  - type: 'Range'
+    link: '/specification-3-17#range'
+  - type: 'Location'
+    link: '/specification-3-17#location'
+  - type: 'LocationLink'
+    link: '/specification-3-17#locationLink'
+  - type: 'Diagnostic'
+    link: '/specification-3-17#diagnostic'
+  - type: 'DiagnosticSeverity'
+    link: '/specification-3-17#diagnostic'
+  - type: 'DiagnosticTag'
+    link: '/specification-3-17#diagnostic'
+  - type: 'DiagnosticRelatedInformation'
+    link: '/specification-3-17#diagnostic'
+  - type: 'CodeDescription'
+    link: '/specification-3-17#diagnostic'
+  - type: 'Command'
+    link: '/specification-3-17#command'
+  - type: 'TextEdit'
+    link: '/specification-3-17#textEdit'
+  - type: 'ChangeAnnotation'
+    link: '/specification-3-17#textEdit'
+  - type: 'ChangeAnnotationIdentifier'
+    link: '/specification-3-17#textEdit'
+  - type: 'AnnotatedTextEdit'
+    link: '/specification-3-17#textEdit'
+  - type: 'TextDocumentEdit'
+    link: '/specification-3-17#textDocumentEdit'
+  - type: 'CreateFileOptions'
+    link: '/specification-3-17#resourceChanges'
+  - type: 'CreateFile'
+    link: '/specification-3-17#resourceChanges'
+  - type: 'RenameFileOptions'
+    link: '/specification-3-17#resourceChanges'
+  - type: 'RenameFile'
+    link: '/specification-3-17#resourceChanges'
+  - type: 'DeleteFileOptions'
+    link: '/specification-3-17#resourceChanges'
+  - type: 'DeleteFile'
+    link: '/specification-3-17#resourceChanges'
+  - type: 'WorkspaceEdit'
+    link: '/specification-3-17#workspaceEdit'
+  - type: 'WorkspaceEditClientCapabilities'
+    link: '/specification-3-17#workspaceEditClientCapabilities'
+  - type: 'ResourceOperationKind'
+    link: '/specification-3-17#workspaceEditClientCapabilities'
+  - type: 'FailureHandlingKind'
+    link: '/specification-3-17#workspaceEditClientCapabilities'
+  - type: 'TextDocumentIdentifier'
+    link: '/specification-3-17#textDocumentIdentifier'
+  - type: 'TextDocumentItem'
+    link: '/specification-3-17#textDocumentItem'
+  - type: 'VersionedTextDocumentIdentifier'
+    link: '/specification-3-17#versionedTextDocumentIdentifier'
+  - type: 'OptionalVersionedTextDocumentIdentifier'
+    link: '/specification-3-17#versionedTextDocumentIdentifier'
+  - type: 'TextDocumentPositionParams'
+    link: '/specification-3-17#textDocumentPositionParams'
+  - type: 'DocumentFilter'
+    link: '/specification-3-17#documentFilter'
+  - type: 'DocumentSelector'
+    link: '/specification-3-17#documentFilter'
+  - type: 'StaticRegistrationOptions'
+    link: '/specification-3-17#staticRegistrationOptions'
+  - type: 'TextDocumentRegistrationOptions'
+    link: '/specification-3-17#textDocumentRegistrationOptions'
+  - type: 'MarkupKind'
+    link: '/specification-3-17#markupContent'
+  - type: 'MarkupContent'
+    link: '/specification-3-17#markupContent'
+  - type: 'MarkdownClientCapabilities'
+    link: '/specification-3-17#markupContent'
+  - type: 'WorkDoneProgressBegin'
+    link: '/specification-3-17#workDoneProgressBegin'
+  - type: '$/progress'
+    link: '/specification-3-17#workDoneProgressBegin'
+  - type: 'WorkDoneProgressReport'
+    link: '/specification-3-17#workDoneProgressReport'
+  - type: 'WorkDoneProgressEnd'
+    link: '/specification-3-17#workDoneProgressEnd'
+  - type: 'WorkDoneProgressParams'
+    link: '/specification-3-17#clientInitiatedProgress'
+  - type: 'WorkDoneProgressOptions'
+    link: '/specification-3-17#clientInitiatedProgress'
+  - type: 'PartialResultParams'
+    link: '/specification-3-17#partialResultParams'
+  - type: 'TraceValue'
+    link: '/specification-3-17#traceValue'
  
 - name: "Actual Protocol"
   children:
-  - type: InitializeParams
-    link: initialize
-  - type: InitializeResult
-    link: clientCapabilities
-  - type: InitializedParams
-    link: initialized
-  - type: InitializeError
-    link: clientCapabilities
-  - type: TextDocumentClientCapabilities
-    link: textDocumentClientCapabilities
-  - type: ClientCapabilities
-    link: clientCapabilities
-  - type: ServerCapabilities
-    link: serverCapabilities
-  - type: LogTraceParams
-    link: logTrace
-  - type: SetTraceParams
-    link: setTrace
+  - type: 'InitializeParams'
+    link: '/specification-3-17#initialize'
+  - type: 'InitializeResult'
+    link: '/specification-3-17#clientCapabilities'
+  - type: 'InitializedParams'
+    link: '/specification-3-17#initialized'
+  - type: 'InitializeError'
+    link: '/specification-3-17#clientCapabilities'
+  - type: 'TextDocumentClientCapabilities'
+    link: '/specification-3-17#textDocumentClientCapabilities'
+  - type: 'ClientCapabilities'
+    link: '/specification-3-17#clientCapabilities'
+  - type: 'ServerCapabilities'
+    link: '/specification-3-17#serverCapabilities'
+  - type: 'LogTraceParams'
+    link: '/specification-3-17#logTrace'
+  - type: 'SetTraceParams'
+    link: '/specification-3-17#setTrace'
+
+- name: "Language Features"
+  children:
+  - type: 'textDocument/completion'
+    link: '/lsp/3.17/features/completion#textDocument_completion'
+  - type: 'CompletionParams'
+    link: '/lsp/3.17/features/completion#textDocument_completion'
+  - type: 'CompletionList'
+    link: '/lsp/3.17/features/completion#textDocument_completion'
+  - type: 'CompletionItem'
+    link: '/lsp/3.17/features/completion#textDocument_completion'
+  - type: 'CompletionItem[]'
+    link: '/lsp/3.17/features/completion#textDocument_completion'
+  - type: 'completionItem/resolve'
+    link: '/lsp/3.17/features/completion#completionItem_resolve'
+  - type: 'Hover'
+    link: '/lsp/3.17/features/hover'
+  - type: 'textDocument/hover'
+    link: '/lsp/3.17/features/hover#textDocument_hover'
+  - type: 'HoverParams'
+    link: '/lsp/3.17/features/hover#textDocument_hover'
+  - type: 'Hover'
+    link: '/lsp/3.17/features/hover#textDocument_hover'

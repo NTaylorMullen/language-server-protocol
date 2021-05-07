@@ -37,7 +37,7 @@
     }
 
     var anchor = document.createElement("a");
-    anchor.setAttribute("href", '{{ "/specifications/specification-3-17#" | prepend: site.baseurl }}' + link);
+    anchor.setAttribute("href", '{{ "/specifications" | prepend: site.baseurl }}' + link);
     anchor.textContent = name;
     return anchor;
   }
