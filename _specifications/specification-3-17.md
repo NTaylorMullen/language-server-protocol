@@ -734,6 +734,8 @@ export interface CodeDescription {
 
 Represents a reference to a command. Provides a title which will be used to represent a command in the UI. Commands are identified by a string identifier. The recommended way to handle commands is to implement their execution on the server side if the client and server provides the corresponding capabilities. Alternatively the tool extension code could handle the command. The protocol currently doesn't specify a set of well-known commands.
 
+<details data-parent="command"><summary markdown="0">Code</summary>
+
 ```typescript
 interface Command {
 	/**
@@ -751,12 +753,15 @@ interface Command {
 	arguments?: any[];
 }
 ```
+</details>
 
 #### <a href="#textEdit" name="textEdit" class="anchor"> TextEdit & AnnotatedTextEdit </a>
 
 > New in version 3.16: Support for `AnnotatedTextEdit`.
 
 A textual edit applicable to a text document.
+
+<details data-parent="textEdit"><summary markdown="0">Code</summary>
 
 ```typescript
 interface TextEdit {
@@ -773,8 +778,11 @@ interface TextEdit {
 	newText: string;
 }
 ```
+</details>
 
 Since 3.16.0 there is also the concept of an annotated text edit which supports to add an annotation to a text edit. The annotation can add information describing the change to the text edit.
+
+<details data-parent="textEdit"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -802,8 +810,11 @@ export interface ChangeAnnotation {
 	description?: string;
 }
 ```
+</details>
 
 Usually clients provide options to group the changes along the annotations they are associated with. To support this in the protocol an edit or resource operation refers to a change annotation using an identifier and not the change annotation literal directly. This allows servers to use the identical annotation across multiple edits or resource operations which then allows clients to group the operations under that change annotation. The actual change annotations together with their identifers are managed by the workspace edit via the new property `changeAnnotations`.
+
+<details data-parent="textEdit"><summary markdown="0">Code</summary>
 
 ```typescript
 
@@ -828,6 +839,7 @@ export interface AnnotatedTextEdit extends TextEdit {
 	annotationId: ChangeAnnotationIdentifier;
 }
 ```
+</details>
 
 #### <a href="#textEditArray" name="textEditArray" class="anchor"> TextEdit[] </a>
 
@@ -840,6 +852,8 @@ All text edits ranges refer to positions in the document the are computed on. Th
 > New in version 3.16: support for `AnnotatedTextEdit`. The support is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`. If a client doesn't signal the capability, servers shouldn't send `AnnotatedTextEdit` literals back to the client.
 
 Describes textual changes on a single text document. The text document is referred to as a `OptionalVersionedTextDocumentIdentifier` to allow clients to check the text document version before an edit is applied. A `TextDocumentEdit` describes all changes on a version Si and after they are applied move the document to version Si+1. So the creator of a `TextDocumentEdit` doesn't need to sort the array of edits or do any kind of ordering. However the edits must be non overlapping.
+
+<details data-parent="textDocumentEdit"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface TextDocumentEdit {
@@ -857,12 +871,15 @@ export interface TextDocumentEdit {
 	edits: (TextEdit | AnnotatedTextEdit)[];
 }
 ```
+</details>
 
 ### <a href="#resourceChanges" name="resourceChanges" class="anchor"> File Resource changes </a>
 
 > New in version 3.13. Since version 3.16 file resource changes can carry an additional property `changeAnnotation` to describe the actual change in more detail. Whether a client has support for change annotations is guarded by the client capability `workspace.workspaceEdit.changeAnnotationSupport`.
 
 File resource changes allow servers to create, rename and delete files and folders via the client. Note that the names talk about files but the operations are supposed to work on files and folders. This is in line with other naming in the Language Server Protocol (see file watchers which can watch files and folders). The corresponding change literals look as follows:
+
+<details data-parent="resourceChanges"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -996,12 +1013,15 @@ export interface DeleteFile {
 	annotationId?: ChangeAnnotationIdentifier;
 }
 ```
+</details>
 
 #### <a href="#workspaceEdit" name="workspaceEdit" class="anchor"> WorkspaceEdit </a>
 
 A workspace edit represents changes to many resources managed in the workspace. The edit should either provide `changes` or `documentChanges`. If the client can handle versioned document edits and if `documentChanges` are present, the latter are preferred over `changes`.
 
  Since version 3.13.0 a workspace edit can contain resource operations (create, delete or rename files and folders) as well. If resource operations are present clients need to execute the operations in the order in which they are provided. So a workspace edit for example can consist of the following two changes: (1) create file a.txt and (2) a text document edit which insert text into file a.txt. An invalid sequence (e.g. (1) delete file a.txt and (2) insert text into file a.txt) will cause failure of the operation. How the client recovers from the failure is described by the client capability: `workspace.workspaceEdit.failureHandling`
+
+<details data-parent="workspaceEdit"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface WorkspaceEdit {
@@ -1045,6 +1065,7 @@ export interface WorkspaceEdit {
 	};
 }
 ```
+</details>
 
 ##### <a href="#workspaceEditClientCapabilities" name="workspaceEditClientCapabilities" class="anchor"> WorkspaceEditClientCapabilities </a>
 
@@ -1055,6 +1076,8 @@ The capabilities of a workspace edit has evolved over the time. Clients can desc
 
 * property path (optional): `workspace.workspaceEdit`
 * property type: `WorkspaceEditClientCapabilities` defined as follows:
+
+<details data-parent="workspaceEditClientCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface WorkspaceEditClientCapabilities {
@@ -1162,10 +1185,14 @@ export namespace FailureHandlingKind {
 	export const Undo: FailureHandlingKind = 'undo';
 }
 ```
+</details>
 
 #### <a href="#textDocumentIdentifier" name="textDocumentIdentifier" class="anchor"> TextDocumentIdentifier </a>
 
 Text documents are identified using a URI. On the protocol level, URIs are passed as strings. The corresponding JSON structure looks like this:
+
+<details data-parent="textDocumentIdentifier"><summary markdown="0">Code</summary>
+
 ```typescript
 interface TextDocumentIdentifier {
 	/**
@@ -1174,10 +1201,13 @@ interface TextDocumentIdentifier {
 	uri: DocumentUri;
 }
 ```
+</details>
 
 #### <a href="#textDocumentItem" name="textDocumentItem" class="anchor"> TextDocumentItem </a>
 
 An item to transfer a text document from the client to the server.
+
+<details data-parent="textDocumentItem"><summary markdown="0">Code</summary>
 
 ```typescript
 interface TextDocumentItem {
@@ -1203,6 +1233,7 @@ interface TextDocumentItem {
 	text: string;
 }
 ```
+</details>
 
 Text documents have a language identifier to identify a document on the server side when it handles more than one language to avoid re-interpreting the file extension. If a document refers to one of the programming languages listed below it is recommended that clients use those ids.
 
@@ -1269,6 +1300,8 @@ YAML | `yaml`
 
 An identifier to denote a specific version of a text document. This information usually flows from the client to the server.
 
+<details data-parent="versionedTextDocumentIdentifier"><summary markdown="0">Code</summary>
+
 ```typescript
 interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	/**
@@ -1280,8 +1313,11 @@ interface VersionedTextDocumentIdentifier extends TextDocumentIdentifier {
 	version: integer;
 }
 ```
+</details>
 
 An identifier which optionally denotes a specific version of a text document. This information usually flows from the server to the client.
+
+<details data-parent="versionedTextDocumentIdentifier"><summary markdown="0">Code</summary>
 
 ```typescript
 interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier {
@@ -1299,12 +1335,15 @@ interface OptionalVersionedTextDocumentIdentifier extends TextDocumentIdentifier
 	version: integer | null;
 }
 ```
+</details>
 
 #### <a href="#textDocumentPositionParams" name="textDocumentPositionParams" class="anchor"> TextDocumentPositionParams </a>
 
 Was `TextDocumentPosition` in 1.0 with inlined parameters.
 
 A parameter literal used in requests to pass a text document and a position inside that document. It is up to the client to decide how a selection is converted into a position when issuing a request for a text document. The client can for example honor or ignore the selection direction to make LSP request consistent with features implemented internally.
+
+<details data-parent="textDocumentPositionParams"><summary markdown="0">Code</summary>
 
 ```typescript
 interface TextDocumentPositionParams {
@@ -1319,6 +1358,7 @@ interface TextDocumentPositionParams {
 	position: Position;
 }
 ```
+</details>
 
 #### <a href="#documentFilter" name="documentFilter" class="anchor"> DocumentFilter </a>
 
@@ -1327,6 +1367,8 @@ A document filter denotes a document through properties like `language`, `scheme
 { language: 'typescript', scheme: 'file' }
 { language: 'json', pattern: '**/package.json' }
 ```
+
+<details data-parent="documentFilter"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface DocumentFilter {
@@ -1358,6 +1400,7 @@ export interface DocumentFilter {
 	pattern?: string;
 }
 ```
+</details>
 
 A document selector is the combination of one or more document filters.
 
@@ -1368,6 +1411,8 @@ export type DocumentSelector = DocumentFilter[];
 #### <a href="#staticRegistrationOptions" name="staticRegistrationOptions" class="anchor"> StaticRegistrationOptions </a>
 
 Static registration options can be used to register a feature in the initialize result with a given server control ID to be able to un-register the feature later on.
+
+<details data-parent="staticRegistrationOptions"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -1381,10 +1426,13 @@ export interface StaticRegistrationOptions {
 	id?: string;
 }
 ```
+</details>
 
 #### <a href="#textDocumentRegistrationOptions" name="textDocumentRegistrationOptions" class="anchor"> TextDocumentRegistrationOptions </a>
 
 Options to dynamically register for requests for a set of text documents.
+
+<details data-parent="textDocumentRegistrationOptions"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -1398,10 +1446,13 @@ export interface TextDocumentRegistrationOptions {
 	documentSelector: DocumentSelector | null;
 }
 ```
+</details>
 
 #### <a href="#markupContent" name="markupContent" class="anchor"> MarkupContent </a>
 
  A `MarkupContent` literal represents a string value which content can be represented in different formats. Currently `plaintext` and `markdown` are supported formats. A `MarkupContent` is usually used in documentation properties of result literals like `CompletionItem` or `SignatureInformation`. If the format is `markdown` the content should follow the [GitHub Flavored Markdown Specification](https://github.github.com/gfm/).
+
+<details data-parent="markupContent"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -1462,8 +1513,11 @@ export interface MarkupContent {
 	value: string;
 }
 ```
+</details>
 
 In addition clients should signal the markdown parser they are using via the client capability `general.markdown` introduced in version 3.16.0 defined as follows:
+
+<details data-parent="markupContent"><summary markdown="0">Code</summary>
 
  ```typescript
 /**
@@ -1483,6 +1537,7 @@ export interface MarkdownClientCapabilities {
 	version?: string;
 }
  ```
+</details>
 
 Known markdown parsers used by clients right now are:
 
@@ -1500,6 +1555,8 @@ Work done progress is reported using the generic [`$/progress`](#progress) notif
 ##### <a href="#workDoneProgressBegin" name="workDoneProgressBegin" class="anchor"> Work Done Progress Begin </a>
 
 To start progress reporting a `$/progress` notification with the following payload must be sent:
+
+<details data-parent="workDoneProgressBegin"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface WorkDoneProgressBegin {
@@ -1541,10 +1598,13 @@ export interface WorkDoneProgressBegin {
 	percentage?: uinteger;
 }
 ```
+</details>
 
 ##### <a href="#workDoneProgressReport" name="workDoneProgressReport" class="anchor"> Work Done Progress Report </a>
 
 Reporting progress is done using the following payload:
+
+<details data-parent="workDoneProgressReport"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface WorkDoneProgressReport {
@@ -1580,10 +1640,13 @@ export interface WorkDoneProgressReport {
 	percentage?: uinteger;
 }
 ```
+</details>
 
 ##### <a href="#workDoneProgressEnd" name="workDoneProgressEnd" class="anchor"> Work Done Progress End </a>
 
 Signaling the end of a progress reporting is done using the following payload:
+
+<details data-parent="workDoneProgressEnd"><summary markdown="0">Code</summary>
 
 ```typescript
 export interface WorkDoneProgressEnd {
@@ -1597,6 +1660,7 @@ export interface WorkDoneProgressEnd {
 	message?: string;
 }
 ```
+</details>
 
 ##### <a href="#initiatingWorkDoneProgress" name="initiatingWorkDoneProgress" class="anchor"> Initiating Work Done Progress </a>
 
@@ -1628,6 +1692,8 @@ Consider a client sending a `textDocument/reference` request to a server and the
 
 The corresponding type definition for the parameter property looks like this:
 
+<details data-parent="clientInitiatedProgress"><summary markdown="0">Code</summary>
+
 ```typescript
 export interface WorkDoneProgressParams {
 	/**
@@ -1636,6 +1702,7 @@ export interface WorkDoneProgressParams {
 	workDoneToken?: ProgressToken;
 }
 ```
+</details>
 
 A server uses the `workDoneToken` to report progress for the specific `textDocument/reference`. For the above request the `$/progress` notification params look like this:
 
@@ -1668,11 +1735,15 @@ To avoid that clients set up a progress monitor user interface before sending a 
 
 The corresponding type definition for the server capability looks like this:
 
+<details data-parent="clientInitiatedProgress"><summary markdown="0">Code</summary>
+
 ```typescript
 export interface WorkDoneProgressOptions {
 	workDoneProgress?: boolean;
 }
 ```
+</details>
+
 ###### <a href="#serverInitiatedProgress" name="serverInitiatedProgress" class="anchor">Server Initiated Progress </a>
 
 Servers can also initiate progress reporting using the `window/workDoneProgress/create` request. This is useful if the server needs to report progress outside of a request (for example the server needs to re-index a database). The returned token can then be used to report progress using the same notifications used as for client initiated progress. A token obtained using the create request should only be used once (e.g. only one begin, many report and one end notification should be sent to it).
@@ -1730,6 +1801,8 @@ If the response errors the provided partial results should be treated as follows
 
 A parameter literal used to pass a partial result token.
 
+<details data-parent="partialResultParams"><summary markdown="0">Code</summary>
+
 ```typescript
 export interface PartialResultParams {
 	/**
@@ -1739,6 +1812,7 @@ export interface PartialResultParams {
 	partialResultToken?: ProgressToken;
 }
 ```
+</details>
 
 #### <a href="#traceValue" name="traceValue" class="anchor"> TraceValue </a>
 
@@ -1784,6 +1858,8 @@ The `initialize` request may only be sent once.
 _Request_:
 * method: 'initialize'
 * params: `InitializeParams` defined as follows:
+
+<details data-parent="initialize"><summary markdown="0">Code</summary>
 
 ```typescript
 interface InitializeParams extends WorkDoneProgressParams {
@@ -1867,12 +1943,16 @@ interface InitializeParams extends WorkDoneProgressParams {
 	workspaceFolders?: WorkspaceFolder[] | null;
 }
 ```
+</details>
+
 Where `ClientCapabilities` and `TextDocumentClientCapabilities` are defined as follows:
 
 
-##### TextDocumentClientCapabilities
+##### <a href="#textDocumentClientCapabilities" name="textDocumentClientCapabilities" class="anchor"> TextDocumentClientCapabilities </a>
 
 `TextDocumentClientCapabilities` define capabilities the editor / tool provides on text documents.
+
+<details data-parent="textDocumentClientCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -2030,10 +2110,15 @@ export interface TextDocumentClientCapabilities {
 	moniker?: MonikerClientCapabilities;
 }
 ```
+</details>
+
+##### <a href="#clientCapabilities" name="clientCapabilities" class="anchor"> ClientCapabilities </a>
 
 `ClientCapabilities` define capabilities for dynamic registration, workspace and text document features the client supports. The `experimental` can be used to pass experimental capabilities under development. For future compatibility a `ClientCapabilities` object literal can have more properties set than currently defined. Servers receiving a `ClientCapabilities` object literal with unknown properties should ignore these properties. A missing property should be interpreted as an absence of the capability. If a missing property normally defines sub properties, all missing sub properties should be interpreted as an absence of the corresponding capability.
 
 Client capabilities got introduced with version 3.0 of the protocol. They therefore only describe capabilities that got introduced in 3.x or later. Capabilities that existed in the 2.x version of the protocol are still mandatory for clients. Clients cannot opt out of providing them. So even if a client omits the `ClientCapabilities.textDocument.synchronization` it is still required that the client provides text document synchronization (e.g. open, changed and close notifications).
+
+<details data-parent="clientCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 interface ClientCapabilities {
@@ -2231,9 +2316,12 @@ interface ClientCapabilities {
 	experimental?: any;
 }
 ```
+</details>
 
 _Response_:
 * result: `InitializeResult` defined as follows:
+
+<details data-parent="clientCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 interface InitializeResult {
@@ -2260,7 +2348,11 @@ interface InitializeResult {
 	};
 }
 ```
+</details>
+
 * error.code:
+
+<details data-parent="clientCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 /**
@@ -2277,8 +2369,11 @@ export namespace InitializeError {
 	export const unknownProtocolVersion: 1 = 1;
 }
 ```
+</details>
 
 * error.data:
+
+<details data-parent="clientCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 interface InitializeError {
@@ -2291,8 +2386,13 @@ interface InitializeError {
 	retry: boolean;
 }
 ```
+</details>
 
-The server can signal the following capabilities:
+The server can signal its `ServerCapabilities`.
+
+##### <a href="#serverCapabilities" name="serverCapabilities" class="anchor"> ServerCapabilities </a>
+
+<details data-parent="serverCapabilities"><summary markdown="0">Code</summary>
 
 ```typescript
 interface ServerCapabilities {
@@ -2526,6 +2626,7 @@ interface ServerCapabilities {
 	experimental?: any;
 }
 ```
+</details>
 
 #### <a href="#initialized" name="initialized" class="anchor">Initialized Notification (:arrow_right:)</a>
 
@@ -2575,6 +2676,8 @@ _Notification_:
 * method: '$/logTrace'
 * params: `LogTraceParams` defined as follows:
 
+<details data-parent="logTrace"><summary markdown="0">Code</summary>
+
 ```typescript
 interface LogTraceParams {
 	/**
@@ -2588,6 +2691,7 @@ interface LogTraceParams {
 	verbose?: string;
 }
 ```
+</details>
 
 #### <a href="#setTrace" name="setTrace" class="anchor">SetTrace Notification (:arrow_right:)</a>
 
@@ -2597,6 +2701,8 @@ _Notification_:
 * method: '$/setTrace'
 * params: `SetTraceParams` defined as follows:
 
+<details data-parent="setTrace"><summary markdown="0">Code</summary>
+
 ```typescript
 interface SetTraceParams {
 	/**
@@ -2605,6 +2711,7 @@ interface SetTraceParams {
 	value: TraceValue;
 }
 ```
+</details>
 
 #### <a href="#window_showMessage" name="window_showMessage" class="anchor">ShowMessage Notification (:arrow_left:)</a>
 
